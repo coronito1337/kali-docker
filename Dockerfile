@@ -30,7 +30,6 @@ RUN touch ~/.hushlogin
 # Remove terminal bell sound - as per Diogo request :)
 RUN sed -i -e 's/# set bell-style none/set bell-style none/g' /etc/inputrc
 # Expose commonly necessary ports
-EXPOSE 80:80
 EXPOSE 8000:8000
 EXPOSE 1337:1337
 WORKDIR /root
