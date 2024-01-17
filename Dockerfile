@@ -3,7 +3,7 @@ RUN apt update && apt upgrade -y && apt install -y && apt full-upgrade -y
 # Install basic utilities
 RUN apt install openvpn sed wget curl nano python3-pip python3 iputils-ping bc dkms tmux zsh net-tools -y
 # Install testing tools
-RUN apt install metasploit-framework john hydra git stegseek steghide  gobuster sublist3r masscan enum4linux hashcat nmap ncat  -y
+RUN apt install enum4linux metasploit-framework john hydra git stegseek steghide  gobuster sublist3r masscan enum4linux hashcat nmap ncat  -y
 RUN mkdir /tools
 RUN git clone https://github.com/ticarpi/jwt_tool.git /tools/jwt_tool
 RUN cd /tools/jwt_tool ; pip3 install -r requirements.txt ; echo "alias jwt_tool=python3 /tools/jwt_tool/jwt_tool.py"
@@ -28,9 +28,10 @@ RUN echo 'set -g mouse on' >> ~/.tmux.conf
 #RUN echo 'bind c new-window -c "#{pane_current_path} \n bind \'"\' split-window -c \"#{pane_current_path}\" \n bind % split-window -h -c \"#{pane_current_path}\"'
 RUN touch ~/.hushlogin
 # Remove terminal bell sound - as per Diogo request :)
-RUN sed -i -e 's/# set bell-style none/set bell-style none/g'
+RUN sed -i -e 's/# set bell-style none/set bell-style none/g' /etc/inputrc
 # Expose commonly necessary ports
-EXPOSE 80
-EXPOSE 8000
-EXPOSE 1337
-CMD [ "tmux ; cd ~ " ]
+EXPOSE 80:80
+EXPOSE 8000:8000
+EXPOSE 1337:1337
+WORKDIR /root
+ENTRYPOINT tmux
