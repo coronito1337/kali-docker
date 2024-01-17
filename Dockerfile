@@ -14,8 +14,8 @@ RUN echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile
 RUN /usr/local/go/bin/go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 # Start terminal customization
 RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-RUN wget https://raw.githubusercontent.com/coronito1337/kali-vagrant/main/my-passion.zsh-theme -O ~/.oh-my-zsh/themes/my-passion.zsh-theme
-RUN sed -i -e 's/robbyrussell/my-passion/g' ~/.zshrc
+RUN wget https://raw.githubusercontent.com/coronito1337/pentester-theme/main/pentest.zsh-theme -O ~/.oh-my-zsh/themes/pentest.zsh-theme
+RUN sed -i -e 's/robbyrussell/pentest/g' ~/.zshrc
 RUN git clone https://github.com/zsh-users/zsh-autosuggestions.git ~/.oh-my-zsh/plugins/zsh-autosuggestions
 RUN git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 RUN git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git ~/.oh-my-zsh/plugins/fast-syntax-highlighting
