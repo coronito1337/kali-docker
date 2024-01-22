@@ -23,9 +23,10 @@ RUN git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/plug
 RUN sed -i -e 's/plugins=(git)/plugins=(tmux git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-completions)/g' ~/.zshrc
 RUN echo 'set-option -g default-shell "/usr/bin/zsh"' > ~/.tmux.conf
 RUN echo 'set -g mouse on' >> ~/.tmux.conf
-# Change Tmux control to CTRL+Space
-#RUN echo 'set -g prefix C-space\n unbind-key C-b\n bind-key C-space send-prefix' >> ~/.tmux.conf
-#RUN echo 'bind c new-window -c "#{pane_current_path} \n bind \'"\' split-window -c \"#{pane_current_path}\" \n bind % split-window -h -c \"#{pane_current_path}\"'
+# Change Tmux control to CTRL+q
+RUN printf 'set -g prefix C-q\nunbind-key C-b\nbind-key C-q send-prefix' >> ~/.tmux.conf
+# Have new tmux windows & splits be on current directory
+RUN printf 'bind c new-window -c "#{pane_current_path}"\nbind F1 split-window -h -c "#{pane_current_path}"\nbind F2 split-window -v -c "#{pane_current_path}"'
 RUN touch ~/.hushlogin
 # Remove terminal bell sound - as per Diogo request :)
 RUN sed -i -e 's/# set bell-style none/set bell-style none/g' /etc/inputrc
